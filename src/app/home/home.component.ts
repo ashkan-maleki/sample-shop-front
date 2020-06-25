@@ -3,6 +3,8 @@ import {Product} from "../abstract/product";
 import {ProductService} from "../product.service";
 import {Cart} from "../abstract/cart";
 import {CartService} from "../cart.service";
+import {AuthService} from "../auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -23,11 +25,16 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private authService : AuthService,
+    private router : Router
   ) {
   }
 
   async ngOnInit(): Promise<void> {
+    if (!this.authService.isAuthenticated) {
+      this.router.navigate(['/login']);
+    }
     await this.getProducts();
   }
 

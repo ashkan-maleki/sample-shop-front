@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Maleki Shop</a>
+  <a class="navbar-brand" routerLink="/">Maleki Shop</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -7,30 +7,37 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" routerLink="/">خانه<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/products">لیست محصولات</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/products/create">اضافه کردن محصول</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/registration">ثبت نام</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/login">ورود</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/logout">خروج</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/profile">پروفایل</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/cart">سبد خرید</a>
-      </li>
+
+      <ng-container *ngIf="!isAuthenticated">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/registration">ثبت نام</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login">ورود</a>
+        </li>
+      </ng-container>
+      <ng-container *ngIf="isAuthenticated">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/">فروشگاه<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/cart">سبد خرید</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/products">لیست محصولات</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/products/create">اضافه کردن محصول</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/logout">خروج</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/profile">پروفایل</a>
+        </li>
+      </ng-container>
+
+
     </ul>
   </div>
 </nav>

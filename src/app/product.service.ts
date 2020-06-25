@@ -10,6 +10,11 @@ export class ProductService {
   productUrl: string = 'http://127.0.0.1:8000/api/products/';
   products: Product[];
 
+  async deleteProduct (id: number): Promise<void> {
+    const url = `${this.productUrl}/${id}`; // DELETE api/heroes/42
+    await this.http.delete(url).toPromise();
+  }
+
   async getProducts(): Promise<Product[]> {
     return await this.http.get<Product[]>(this.productUrl).toPromise();
   }

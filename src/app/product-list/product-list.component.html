@@ -12,9 +12,13 @@
   <tbody>
   <tr *ngFor="let product of products ">
     <td>
-      <a class="btn btn-dark btn-sm" routerLink="/products/{{product?.id}}/edit">
-        اصلاح
-      </a>
+
+      <form  class="form-inline" [formGroup]="productForm" (ngSubmit)="onSubmit(product)">
+        <a class="btn btn-dark btn-sm" routerLink="/products/{{product?.id}}/edit">
+          اصلاح
+        </a>
+        <button class="btn btn-warning btn-sm" type="submit">حذف</button>
+      </form>
     </td>
     <td>{{product.price}}</td>
     <td>{{product.name }}</td>

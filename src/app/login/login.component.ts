@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder} from "@angular/forms";
+import { Router } from '@angular/router';
+
+
 import {AuthService} from "../auth.service";
 import {Login} from "../abstract/login";
 
@@ -13,7 +16,8 @@ export class LoginComponent implements OnInit {
   loginForm;
   constructor(
     private formBuilder : FormBuilder,
-    private authService : AuthService
+    private authService : AuthService,
+    private router: Router,
   ) {
     this.loginForm = this.formBuilder.group({
       username: '',
@@ -23,8 +27,9 @@ export class LoginComponent implements OnInit {
   }
 
   async onSubmit(inputData) {
-    let login : Login = inputData as Login;
+    let login = inputData;
     login = await this.authService.login(login);
+    await this.router.navigate(['/']);
     console.log(login);
   }
 
