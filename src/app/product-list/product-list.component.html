@@ -1,13 +1,27 @@
-<div *ngIf="products">
-  <div *ngFor="let product of products ">
-    <h4>{{product?.name }} <span class="badge">({{product?.id}})</span></h4>
-    <p>{{product?.price}}</p>
-    <a routerLink="/products/{{product?.id}}">
-       view
-    </a>
-    <a routerLink="/products/{{product?.id}}/edit">
-      edit
-    </a>
-  </div>
-
-</div>
+<h3 class="mt-5">لیست محصولات</h3>
+<table class="table" *ngIf="products; else noProducts">
+  <caption>لیست محصولات</caption>
+  <thead>
+  <tr>
+    <th scope="col">عملیات</th>
+    <th scope="col">قیمت</th>
+    <th scope="col">محصول</th>
+    <th scope="col">#</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let product of products ">
+    <td>
+      <a class="btn btn-dark btn-sm" routerLink="/products/{{product?.id}}/edit">
+        اصلاح
+      </a>
+    </td>
+    <td>{{product.price}}</td>
+    <td>{{product.name }}</td>
+    <th scope="row">{{product.id}}</th>
+  </tr>
+  </tbody>
+</table>
+<ng-template #noProducts>
+  هیچ محصولی وجود ندارد
+</ng-template>
