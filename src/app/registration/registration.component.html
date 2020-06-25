@@ -1,24 +1,22 @@
+<h3 class="mt-5">فرم ثبت نام</h3>
 <div>
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm.value)">
-    <div>
+    <div class="form-group">
       <label for="username">نام کاربری</label>
-      <input type="text" formControlName="username" id="username">
+      <input class="form-control" type="text" formControlName="username" id="username">
     </div>
-    <div>
+    <div class="form-group">
       <label for="email">ایمیل</label>
-      <input type="email" formControlName="email" id="email">
+      <input class="form-control" type="email" formControlName="email" id="email">
     </div>
-    <div>
+    <div class="form-group">
       <label for="password1">پسورد ۱</label>
-      <input type="text" formControlName="password1" id="password1">
+      <input class="form-control" type="text" formControlName="password1" id="password1">
     </div>
-    <div>
+    <div class="form-group">
       <label for="password2">پسورد ۲</label>
-      <input type="text" formControlName="password2" id="password2">
+      <input class="form-control" type="text" formControlName="password2" id="password2">
     </div>
-    <button type="submit">ثبت نام</button>
-    <a routerLink="/">
-      خانه
-    </a>
+    <button class="btn btn-dark" type="submit">ثبت نام</button>
   </form>
 </div>
