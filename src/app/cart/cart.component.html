@@ -1,0 +1,31 @@
+<h3 class="mt-5">سبد خرید</h3>
+<table class="table" *ngIf="cart.length; else noCart">
+  <caption>لیست محصولات</caption>
+  <thead>
+  <tr>
+    <th scope="col">عملیات</th>
+    <th scope="col">قیمت کل</th>
+    <th scope="col">تعداد</th>
+    <th scope="col">قیمت</th>
+    <th scope="col">محصول</th>
+    <th scope="col">#</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let cartItem of cart ; let i = index">
+    <td>
+      <button class="btn btn-dark btn-sm" (click)="deleteProduct(cartItem.product)">حذف</button>
+      <button class="btn btn-dark btn-sm" (click)="decreaseProductCount(cartItem.product)">کاهش</button>
+      <button class="btn btn-dark btn-sm" (click)="increaseProductCount(cartItem.product)">افزایش</button>
+    </td>
+    <td>{{cartItem.totalPrice}}</td>
+    <td>{{cartItem.count}}</td>
+    <td>{{cartItem.product.price }}</td>
+    <td>{{cartItem.product.name }}</td>
+    <th scope="row">{{i+1}}</th>
+  </tr>
+  </tbody>
+</table>
+<ng-template #noCart>
+  سبد خرید شما خالیست
+</ng-template>

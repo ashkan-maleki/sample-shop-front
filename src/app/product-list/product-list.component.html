@@ -1,0 +1,13 @@
+<div *ngIf="products">
+  <div *ngFor="let product of products ">
+    <h4>{{product?.name }} <span class="badge">({{product?.id}})</span></h4>
+    <p>{{product?.price}}</p>
+    <a routerLink="/products/{{product?.id}}">
+       view
+    </a>
+    <a routerLink="/products/{{product?.id}}/edit">
+      edit
+    </a>
+  </div>
+
+</div>

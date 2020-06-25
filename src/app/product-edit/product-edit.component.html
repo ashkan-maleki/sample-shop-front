@@ -1,0 +1,16 @@
+<div>
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit(productForm.value)">
+    <div>
+      <label for="name">نام</label>
+      <input type="text" formControlName="name" id="name">
+    </div>
+    <div>
+      <label for="price">قیمت</label>
+      <textarea formControlName="price" id="price"></textarea>
+    </div>
+    <button type="submit">ثبت</button>
+    <a routerLink="/products/">
+      back
+    </a>
+  </form>
+</div>

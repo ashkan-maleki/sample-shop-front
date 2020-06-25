@@ -1,0 +1,24 @@
+<div>
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm.value)">
+    <div>
+      <label for="username">نام کاربری</label>
+      <input type="text" formControlName="username" id="username">
+    </div>
+    <div>
+      <label for="email">ایمیل</label>
+      <input type="email" formControlName="email" id="email">
+    </div>
+    <div>
+      <label for="password1">پسورد ۱</label>
+      <input type="text" formControlName="password1" id="password1">
+    </div>
+    <div>
+      <label for="password2">پسورد ۲</label>
+      <input type="text" formControlName="password2" id="password2">
+    </div>
+    <button type="submit">ثبت نام</button>
+    <a routerLink="/">
+      خانه
+    </a>
+  </form>
+</div>
