@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import { GoogleMapsAPIWrapper } from '@agm/core'
+import {FormBuilder} from "@angular/forms";
+import {ActivatedRoute} from "@angular/router";
+import {ProductService} from "../product.service";
+import {LocationService} from "../location.service";
+import {Location} from "../abstract/location";
 
 
 @Component({
@@ -9,13 +14,34 @@ import { GoogleMapsAPIWrapper } from '@agm/core'
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  ngOnInit() {
+  addressForm;
 
-  }
   constructor(
-    public gMaps: GoogleMapsAPIWrapper
-  ) {}
+    private formBuilder : FormBuilder,
+    private route : ActivatedRoute,
+    public gMaps: GoogleMapsAPIWrapper,
+    public locationService : LocationService
+    // private location : Location
+  ) {
+    this.addressForm = this.formBuilder.group({
+      latitude: '',
+      longitude: ''
+    });
+  }
 
+  async onSubmit(inputData) {
+    let location : Location = {
+      latitude: this.lat.toString(),
+      longitude: this.lng.toString()
+    } as Location;
+    location = await this.locationService.addLocation(location);
+  }
+
+  async ngOnInit(): Promise<void> {
+    let location =  await this.locationService.getLocation();
+    this.lat = +location.latitude;
+    this.lng = +location.longitude;
+  }
   public markerClicked = (markerObj) => {
     this.gMaps.setCenter({ lat: markerObj.latitude, lng: markerObj.longitude });
     console.log('clicked', markerObj, { lat: markerObj.latitude, lng: markerObj.longitude });
