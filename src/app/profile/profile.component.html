@@ -1,26 +1,30 @@
-<div id="map" class="map"></div>
-<div id="popup" class="ol-popup">
-  <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-  <div id="popup-content"></div>
+<div class="mt-5">
+  <agm-map
+    [latitude]="lat"
+    [longitude]="lng"
+    [zoom]="9"
+    (mapClick)="addMarker($event.coords.lat, $event.coords.lng)"
+  >
+    <agm-marker
+      *ngFor="let marker of markers"
+      [latitude]="marker.lat"
+      [longitude]="marker.lng"
+      [opacity]="marker.alpha"
+      [markerDraggable]="true"
+      (markerClick)="selectMarker($event)"
+    >
+    </agm-marker>
+    <agm-rectangle
+      [north]="max('lat')"
+      [east]="max('lng')"
+      [south]="min('lat')"
+      [west]="min('lng')"
+    >
+    </agm-rectangle>
+  </agm-map>
+  <p *ngIf="selectedMarker">
+    Lat: {{ selectedMarker.lat }} Lng: {{ selectedMarker.lng }}
+  </p>
+
+
 </div>
-
-<script>
-  var container = document.getElementById('popup');
-  var content = document.getElementById('popup-content');
-  var closer = document.getElementById('popup-closer');
-
-  var overlay = new ol.Overlay({
-    element: container,
-    autoPan: true,
-    autoPanAnimation: {
-      duration: 250
-    }
-  });
-  map.addOverlay(overlay);
-
-  closer.onclick = function() {
-    overlay.setPosition(undefined);
-    closer.blur();
-    return false;
-  };
-</script>
