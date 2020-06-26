@@ -1,4 +1,17 @@
 <div class="mt-5">
+  <div class="form-group">
+    <label for="cityList"></label>
+    <select
+    name="cityList"
+    id="cityList"
+    class="form-control"
+    [(ngModel)]="selectedCity"
+    [value]='0'
+    (change)='onOptionsSelected()'
+  >
+    <option *ngFor="let city of cityList"  [value]="city.id">{{ city.name }}</option>
+  </select>
+  </div>
   <agm-map
     [latitude]="lat"
     [longitude]="lng"

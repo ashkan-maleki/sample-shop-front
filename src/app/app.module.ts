@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from "@angular/common/http";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
-import {AgmCoreModule} from "@agm/core";
+import {AgmCoreModule, GoogleMapsAPIWrapper} from "@agm/core";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -40,16 +40,19 @@ import { NavbarComponent } from './navbar/navbar.component';
     HttpClientModule,
     ReactiveFormsModule,
     AgmCoreModule.forRoot({
-      // apiKey: 'AIzaSyCn-zi9j1dor3-Acp5xEgqGDcRKuxUuksg'
-      apiKey: ''
+      apiKey: 'AIzaSyCn-zi9j1dor3-Acp5xEgqGDcRKuxUuksg'
+
 
       /* apiKey is required, unless you are a
       premium customer, in which case you can
       use clientId
       */
     }),
+    FormsModule,
   ],
-  providers: [],
+  providers: [
+    GoogleMapsAPIWrapper
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

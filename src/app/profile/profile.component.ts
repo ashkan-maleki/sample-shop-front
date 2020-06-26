@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { GoogleMapsAPIWrapper } from '@agm/core'
+
 
 @Component({
   selector: 'app-profile',
@@ -8,8 +10,42 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
   ngOnInit() {
+
   }
-  // Lat: 35.70024391500173 Lng: 51.3446044921875
+  constructor(
+    public gMaps: GoogleMapsAPIWrapper
+  ) {}
+
+  public markerClicked = (markerObj) => {
+    this.gMaps.setCenter({ lat: markerObj.latitude, lng: markerObj.longitude });
+    console.log('clicked', markerObj, { lat: markerObj.latitude, lng: markerObj.longitude });
+    // const position = new google.maps.LatLng(markerObj.latitude, markerObj.longitude);
+    // this.map.panTo(position);
+  }
+  onOptionsSelected() {
+    if (this.selectedCity == 0) {
+      return;
+    }
+    let selectedCityLocation = this.citiesLocation[this.selectedCity - 1];
+    this.addMarker(selectedCityLocation.lat, selectedCityLocation.lng);
+
+  }
+  selectedCity = 1;
+  cityList = [
+    {id: 0, name: "شهر خود را انتخاب کنید."},
+    {id: 1, name: "تهران"},
+    {id: 2, name: "قم"},
+    {id: 3, name: "اصفهان"},
+  ];
+
+  // Lat: 32.657170119609525 Lng: 51.668044490288366
+  citiesLocation = [
+    // These are all just random coordinates from https://www.random.org/geographic-coordinates/
+    { lat: 35.70024, lng: 51.45778},
+    { lat: 34.61355, lng: 50.90306 },
+    { lat: 32.65717, lng: 51.66804 },
+  ];
+
   lat = 35.70024;
   lng = 51.34460;
   selectedMarker;
@@ -24,6 +60,9 @@ export class ProfileComponent implements OnInit {
   ];
 
   addMarker(lat: number, lng: number) {
+    this.gMaps.setCenter({ lat: lat, lng: lng });
+    this.lat = lat;
+    this.lng = lng;
     if (this.markers.length == 1) {
       let marker =  this.markers[0];
       marker.lat = lat;
